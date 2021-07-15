@@ -23,11 +23,12 @@ def publish_to_cloud():
 @app.route('/register', methods=["GET", "POST"])
 def register_user():
     key = request.json['key']
+    blog = request.json['blog']
     msg = email_utils.fetch_raw_email_from_aws(key)
 
     email = email_utils.fetch_from_address(msg)
-    repo = db_utils.get_blog_from_email(email)
-    db_utils.register_user(email, repo)
+    db_utils.register_user(email, blog)
+    git_utils.update_template(blog)
 
     return 'Registered', 200
 
