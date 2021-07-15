@@ -1,10 +1,12 @@
 import email
+import uuid
 from email import policy
 
 import requests
 from dateutil.parser import parse
 
 BASE_URL = 'https://internetblog.s3.amazonaws.com/post/'
+POST_METADATA = '---\nlayout: post\ntitle:  "{title}"\n---\n'
 
 
 def fetch_raw_email_from_aws(key):
@@ -18,7 +20,7 @@ def fetch_raw_email_from_aws(key):
 def fetch_post_body_html(msg):
     body = msg.get_body(preferencelist=('html', 'plain'))
     # Remove the Content-Type: text/html; charset="UTF-8" parts
-    return body.as_string().split('\n', 1)[0]
+    return body.as_string().split('\n', 1)[1]
 
 
 def fetch_post_title(msg):
@@ -37,3 +39,17 @@ def fetch_from_address(msg):
 
 def fetch_to_address(msg):
     return msg['to']
+
+
+def format_post(msg):
+    title = fetch_post_title(msg)
+    body = fetch_post_body_html(msg)
+    post = POST_METADATA.format(title=title) + body
+    return post
+
+
+def fetch_filename(msg):
+    post_uuid = uuid.uuid4().__str__()
+    timestamp = fetch_post_timestamp(msg)
+    filename = timestamp.strftime('%d-%m-%y-') + post_uuid + '.md'
+    return filename
