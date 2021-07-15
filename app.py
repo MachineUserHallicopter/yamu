@@ -21,7 +21,7 @@ def publish_to_cloud():
 
 
 @app.route('/register', methods=["GET", "POST"])
-def publish_to_cloud():
+def register_user():
     key = request.json['key']
     msg = email_utils.fetch_raw_email_from_aws(key)
 
