@@ -21,5 +21,3 @@ def update_template(repo):
 
     # Create and push the template
     os.system('./create_repo.sh ' + repo + ' ' + os.getenv('GITHUB_TOKEN'))
-
-update_template("coolest")
