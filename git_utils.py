@@ -12,13 +12,14 @@ def push_file_to_github(filename, content, repo):
 
 
 def update_template(repo):
-    file_name = 'template/_config.yml'
-    print("title: "+repo+"\nbaseurl: '/"+repo+"/' # name of the repository")
+    os.system('./build_template.sh')
+    file_name = '../build/_config.yml'
+    print("\ntitle: "+repo+"\nbaseurl: '/"+repo+"/' # name of the repository")
     file = open(file_name, "a")  # append mode
-    file.write("title: "+repo+"\nbaseurl: '/"+repo+"/' # name of the repository")
+    file.write("\ntitle: "+repo+"\nbaseurl: '/"+repo+"/' # name of the repository")
     file.close()
 
     # Create and push the template
     os.system('./create_repo.sh ' + repo + ' ' + os.getenv('GITHUB_TOKEN'))
 
-update_template("yamu")
+update_template("coolest")

@@ -1,7 +1,7 @@
 ### your site title here
 
-title: InternetBlogCo
-baseurl: '/testing/' # name of the repository
+#title: InternetBlogCo
+#baseurl: '/testing/' # name of the repository
 email: your@email.com
 
 
@@ -48,7 +48,3 @@ exclude:
 plugins:
   - jekyll-seo-tag
   - jekyll-paginate
-title: yamu
-baseurl: '/yamu/' # name of the repositorytitle: yamu
-baseurl: '/yamu/' # name of the repositorytitle: yamu
-baseurl: '/yamu/' # name of the repository
